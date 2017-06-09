@@ -13,7 +13,7 @@ You should also place the config file "accounting_files.ini" inside the config d
 
 The "accounting_files.ini" file contains several parameters that gives you the possibility to costumize your plugin.
 
- 1. Parameters of the information Log :
+**1. Parameters of the information Log :**
 
 * *path:* The path of the directory where you want to store the output files (**default:** `/accounting_files` folder inside current HARAKA installation directory). 
 * *extension:* The extension of the files (**default:** `tsv`).
@@ -41,7 +41,7 @@ The "accounting_files.ini" file contains several parameters that gives you the p
 		- *custom_FIELD:* Gives you the ability of logging custom/dynamic fields (`FIELD` should be replaced by the name of the custom field you wish to log).
 		- *vmta:* The virtual MTA name (If [VMTA](https://github.com/haraka/haraka-plugin-vmta) plugin is used).
 
- 2. Parameters of the `Archiving` mode :
+**2. Parameters of the `Archiving` mode :**
 
 * *archiving:* Enable the archiving of the accounting files (**default:** `false`).
 * *archive_to:* The path where to move the accounting files (**default:** `archive` folder inside every type).
