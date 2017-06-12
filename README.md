@@ -20,26 +20,28 @@ The "accounting_files.ini" file contains several parameters that gives you the p
 * ***separator:*** The separator of the fields inside the files (**default:** tabulation).
 * ***location:*** Custom names of the three directories 'Delivered/Deffered/Bounce' inside inside the `path`.
 * ***fields:*** The list of fields you want to retrieve for every type(**default:** check the list bellow).
-	- **Delivered:** type,timeLogged,timeQueued,rcpt,srcMta,srcIp,destIp,vmta,jobId,dsnStatus,dsnMsg
-	- **Deferred:** type,timeLogged,timeQueued,rcpt,srcMta,srcIp,vmta,jobId,dsnStatus,dsnMsg,delay
-	- **Bounce:** type,timeLogged,timeQueued,rcpt,srcMta,srcIp,destIp,vmta,jobId,dsnStatus,dsnMsg
 	
-	
-	- The list of available `fields` :
+The list of available `fields` :
 
-		- ***type:*** The type of the entry (`d` for delivered, `df` for deferred, `b` for bounce)
-		- ***timeLogged:*** Represent the time when the entry is logged to the file.
-		- ***timeQueued:*** Represent the time when the entry is queued.
-		- ***rcpt:*** The recipient (The content of `RCPT TO`).
-		- ***srcMta:*** The MTA name from which the message was received (Extracted from the `HELO/EHLO` command).
-		- ***srcIp:*** (Source IP) The local IP address used for the delivery.
-		- ***destIp:*** (Destination IP) The IP address where the message was delivered.
-		- ***jobId:*** Unique id of the mail.
-		- ***dsnStatus:*** DSN status for the recipient to which it refers.
-		- ***dsnMsg:*** DSN string message.
-		- ***delay:*** The delayed time before trying to resend the deferred mail (just in case of deferred mails).
-		- ***custom_FIELD:*** Gives you the ability of logging custom/dynamic fields (`FIELD` should be replaced by the name of the custom field you wish to log).
-		- ***vmta:*** The virtual MTA name (If [VMTA](https://github.com/haraka/haraka-plugin-vmta) plugin is used).
+* ***type:*** The type of the entry (`d` for delivered, `df` for deferred, `b` for bounce)
+* ***timeLogged:*** Represent the time when the entry is logged to the file.
+* ***timeQueued:*** Represent the time when the entry is queued.
+* ***rcpt:*** The recipient (The content of `RCPT TO`).
+* ***srcMta:*** The MTA name from which the message was received (Extracted from the `HELO/EHLO` command).
+* ***srcIp:*** (Source IP) The local IP address used for the delivery.
+* ***destIp:*** (Destination IP) The IP address where the message was delivered.
+* ***jobId:*** Unique id of the mail.
+* ***dsnStatus:*** DSN status for the recipient to which it refers.
+* ***dsnMsg:*** DSN string message.
+* ***delay:*** The delayed time before trying to resend the deferred mail (just in case of deferred mails).
+* ***custom_FIELD:*** Gives you the ability of logging custom/dynamic fields (`FIELD` should be replaced by the name of the custom field you wish to log).
+* ***vmta:*** The virtual MTA name (If [VMTA](https://github.com/haraka/haraka-plugin-vmta) plugin is used).
+
+**INFO:** The **default** fields for every type :
+* **Delivered:** type,timeLogged,timeQueued,rcpt,srcMta,srcIp,destIp,vmta,jobId,dsnStatus,dsnMsg
+* **Deferred:** type,timeLogged,timeQueued,rcpt,srcMta,srcIp,vmta,jobId,dsnStatus,dsnMsg,delay
+* **Bounce:** type,timeLogged,timeQueued,rcpt,srcMta,srcIp,destIp,vmta,jobId,dsnStatus,dsnMsg,bounceCat
+    	
 
 **2. Parameters of the `Archiving` mode :**
 
