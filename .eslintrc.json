@@ -1,0 +1,21 @@
+{
+  "env": {
+    "mocha": true
+  },
+  "globals": {
+    "server": true,
+    "OK": true,
+    "CONT": true,
+    "DENY": true,
+    "DENYSOFT": true,
+    "DENYDISCONNECT": true,
+    "DENYSOFTDISCONNECT": true
+  },
+  "plugins": [
+    "haraka"
+  ],
+  "extends": [ "eslint:recommended", "plugin:haraka/recommended" ],
+  "rules": {
+    "no-console": 0
+  }
+}
