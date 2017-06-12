@@ -111,8 +111,6 @@ exports.init_plugin = function (next)  {
         }
     }
 
-
-    //context.loginfo(getFileSizeInMegabyte('/tmp/PMTA-UsersGuide-4.0.pdf'));
     context.loginfo("Plugin is Ready!");
 
     return next();
@@ -133,7 +131,7 @@ exports.delivered = function (next, hmail, params) {
     if (!todo) return next();
 
     var fields_values = {};
-    //"type,timeLogged,timeQueued,rcpt,srcType,srcMta,dlvSourceIp,dlvDestinationIp,vmta,jobId,header_XXX,dsnStatus,dsnDiag"
+
     server.notes.delivered_fields.forEach (function(field) {
 
         plugin.loginfo(field);
@@ -183,9 +181,6 @@ exports.delivered = function (next, hmail, params) {
 
     addRecord(server.notes.delivered_file_path, server.notes.delivered_fields, fields_values, 'delivered', this);
 
-    this.loginfo(params);
-    this.loginfo(todo);
-    //this.loginfo(header);
     this.loginfo("Delivered Record Added.------"+outbound.get_stats());
 
     return next();
@@ -198,7 +193,7 @@ exports.deferred  = function (next, hmail, params) {
     if (!todo) return next();
 
     var fields_values = {};
-    //"type,timeLogged,timeQueued,rcpt,srcType,srcMta,dlvSourceIp,dlvDestinationIp,vmta,jobId,header_XXX,dsnStatus,dsnDiag,bounceCat"
+
     server.notes.deferred_fields.forEach (function(field) {
         switch (field) {
             case "type" :
@@ -251,11 +246,6 @@ exports.deferred  = function (next, hmail, params) {
 
     addRecord(server.notes.deferred_file_path, server.notes.deferred_fields, fields_values, 'deferred', this);
 
-    this.loginfo(params);
-    this.loginfo(params.delay);
-    this.loginfo(server.notes.deferred_file_path);
-    this.loginfo(todo);
-    //this.loginfo(header);
     this.loginfo("Deferred Record Added.");
 
     return next();
@@ -268,7 +258,7 @@ exports.bounce    = function (next, hmail, error) {
     if (!todo) return next();
 
     var fields_values = {};
-    //"type,timeLogged,timeQueued,rcpt,srcType,srcMta,dlvSourceIp,dlvDestinationIp,vmta,jobId,header_XXX,dsnStatus,dsnDiag,bounceCat"
+
     server.notes.bounce_fields.forEach (function(field) {
         switch (field) {
             case "type" :
@@ -324,8 +314,6 @@ exports.bounce    = function (next, hmail, error) {
 
     addRecord(server.notes.bounce_file_path, server.notes.bounce_fields, fields_values, 'bounce', this);
 
-    this.loginfo(todo);
-    //this.loginfo(header);
     this.loginfo("Bounce Record Added.");
 
     //Prevent the sending of bounce mail to originating sender
@@ -422,10 +410,6 @@ var addRecord = function (filename, fields, fields_values, type, context) {
         record += fields_values[field] + separator;
     });
 
-    //context.loginfo("------------------------------------------");
-    //context.loginfo(record);
-    //context.loginfo("------------------------------------------");
-
     fs.appendFileSync(filename, record + "\r\n");
 
     checkSizeAndMove(filename, type, context);
@@ -470,8 +454,6 @@ var getFileSizeInMegabyte = function ( filename ) {
 //Check the size of the file if it's greater or equals to 'max_size' archive the file to the related directory and generate a new file
 var checkSizeAndMove = function ( filename, type, context ) {
     var file_size	 = getFileSizeInMegabyte(filename);
-
-    //context.loginfo("File '" + filename + "' size " + file_size);
 
     if ( file_size >= server.notes.max_size ) {
         var move_to_path = '';
