@@ -1,0 +1,43 @@
+{
+  "name": "haraka-plugin-accounting-files",
+  "version": "0.0.1",
+  "description": "Extraction/Storage/Archiving usefull information from the outbound traffic of the three main types 'Delivered/Deffered/Bounce'.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint *.js test/*.js",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acharkizakaria/haraka-plugin-accounting-files.git"
+  },
+  "keywords": [
+    "Haraka",
+    "Plugin",
+    "accounting-files",
+    "Accounting",
+    "Files"
+  ],
+  "author": "“Zakaria <“acharki.zakaria@gmail.com”>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/acharkizakaria/haraka-plugin-accounting-files/issues"
+  },
+  "homepage": "https://github.com/acharkizakaria/haraka-plugin-accounting-files#readme",
+  "dependencies": {
+    "haraka-constants": "*",
+    "dateformat": "*"
+  },
+  "devDependencies": {
+    "assert": "*",
+    "coveralls": "^2.13.0",
+    "eslint": "^3.19.0",
+    "eslint-plugin-haraka": "^1.0.5",
+    "eslint-plugin-node": "^4.2.2",
+    "haraka-test-fixtures": "*",
+    "istanbul": "^0.4.5",
+    "mocha": "*",
+    "fs": "*",
+    "path": "*"
+  }
+}
