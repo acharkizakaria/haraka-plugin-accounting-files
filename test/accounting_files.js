@@ -3,7 +3,6 @@ var assert   = require('assert');
 
 // npm modules
 var fixtures = require('haraka-test-fixtures');
-var path 	 = require("path");
 
 //Default config
 var default_config = {
