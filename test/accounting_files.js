@@ -62,17 +62,6 @@ describe('Accounting-files config file', function () {
         done();
     });
 
-    /*it('Check availability of "x-vmta" inside Header', function (done) {
-        this.connection.transaction.header.add('x-vmta', "vmta_test");
-
-        assert.ok( this.connection.transaction.header.headers['x-vmta'] );
-        done();
-    });
-
-    it('Check availability of "mta1" inside Config file', function (done) {
-        assert.ok(this.plugin.cfg.mta1);
-        done();
-    });*/
-    //console.log(this.plugin.localAddresses());
+    //TODO
 
 });
