@@ -132,7 +132,7 @@ exports.delivered = function (next, hmail, params) {
 
     var fields_values = {};
 
-    server.notes.delivered_fields.forEach ( function(field) {
+    server.notes.delivered_fields.forEach ( function (field) {
 
         plugin.loginfo(field);
 
@@ -194,7 +194,7 @@ exports.deferred  = function (next, hmail, params) {
 
     var fields_values = {};
 
-    server.notes.deferred_fields.forEach ( function(field) {
+    server.notes.deferred_fields.forEach ( function (field) {
         switch (field) {
             case "type" :
                 fields_values.type = "df";
@@ -259,7 +259,7 @@ exports.bounce    = function (next, hmail, error) {
 
     var fields_values = {};
 
-    server.notes.bounce_fields.forEach ( function(field) {
+    server.notes.bounce_fields.forEach ( function (field) {
         switch (field) {
             case "type" :
                 fields_values.type = "b";
@@ -394,7 +394,7 @@ var createFileIfNotExist = function (filename, fields) {
 var setHeaderFromFields = function (filename, fields) {
     var headers = "";
 
-    fields.forEach ( function(field) {
+    fields.forEach ( function (field) {
         headers += field + server.notes.separator;
     });
 
@@ -406,7 +406,7 @@ var addRecord = function (filename, fields, fields_values, type, context) {
     var separator 	= server.notes.separator;
     var record 		= "";
 
-    fields.forEach  ( function(field) {
+    fields.forEach  ( function (field) {
         record += fields_values[field] + separator;
     });
 
@@ -428,8 +428,8 @@ var moveDirFiles = function (from_dir, to_dir, except, context) {
     except = except.concat(new_files);
 
     //Move content
-    fs.readdir(from_dir, function(err, files) {
-        files.forEach ( function(filename) {
+    fs.readdir(from_dir, function (err, files) {
+        files.forEach ( function (filename) {
             if (except.indexOf(filename) == -1) {
                 fs.rename(from_dir + "/" + filename, to_dir + "/" + filename, function (_err) {
                     if (_err) {
