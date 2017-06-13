@@ -132,49 +132,49 @@ exports.delivered = function (next, hmail, params) {
 
     var fields_values = {};
 
-    server.notes.delivered_fields.forEach (function(field) {
+    server.notes.delivered_fields.forEach ( function(field) {
 
         plugin.loginfo(field);
 
         switch (field) {
             case "type" :
-                fields_values["type"] = "d";
+                fields_values.type = "d";
                 break;
             case "timeLogged" :
-                fields_values["timeLogged"] = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
+                fields_values.timeLogged = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
                 break;
             case "timeQueued" :
-                fields_values["timeQueued"] = dateFormat(new Date(todo.queue_time), "yyyy-mm-dd HH:MM:ss");
+                fields_values.timeQueued = dateFormat(new Date(todo.queue_time), "yyyy-mm-dd HH:MM:ss");
                 break;
             case "rcpt" :
-                fields_values["rcpt"] = rcpt_to.original.slice(1, -1);
+                fields_values.rcpt = rcpt_to.original.slice(1, -1);
                 break;
             case "srcType" :
-                fields_values["srcType"] = "smtp";
+                fields_values.srcType = "smtp";
                 break;
             case "srcMta" :
-                fields_values["srcMta"] = todo.notes.outbound_helo;
+                fields_values.srcMta = todo.notes.outbound_helo;
                 break;
             case "dlvSourceIp" :
-                fields_values["dlvSourceIp"] = todo.notes.outbound_ip;
+                fields_values.dlvSourceIp = todo.notes.outbound_ip;
                 break;
             case "dlvDestinationIp" :
-                fields_values["dlvDestinationIp"] = params[1] || " - ";
+                fields_values.dlvDestinationIp = params[1] || " - ";
                 break;
             case "vmta" :
-                fields_values["vmta"] = server.notes.vmta || " - ";
+                fields_values.vmta = server.notes.vmta || " - ";
                 break;
             case "jobId" :
-                fields_values["jobId"] = todo.uuid;
+                fields_values.jobId = todo.uuid;
                 break;
             case (field.match(/^header_/) || {}).input :
                 fields_values[field] = header.get(field) || " - ";
                 break;
             case "dsnStatus" :
-                fields_values["dsnStatus"] = "";
+                fields_values.dsnStatus = "";
                 break;
             case "dsnDiag" :
-                fields_values["dsnDiag"] = "";
+                fields_values.dsnDiag = "";
                 break;
         }
     });
@@ -194,52 +194,52 @@ exports.deferred  = function (next, hmail, params) {
 
     var fields_values = {};
 
-    server.notes.deferred_fields.forEach (function(field) {
+    server.notes.deferred_fields.forEach ( function(field) {
         switch (field) {
             case "type" :
-                fields_values["type"] = "df";
+                fields_values.type = "df";
                 break;
             case "timeLogged" :
-                fields_values["timeLogged"] = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
+                fields_values.timeLogged = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
                 break;
             case "timeQueued" :
-                fields_values["timeQueued"] = dateFormat(new Date(todo.queue_time), "yyyy-mm-dd HH:MM:ss");
+                fields_values.timeQueued = dateFormat(new Date(todo.queue_time), "yyyy-mm-dd HH:MM:ss");
                 break;
             case "rcpt" :
-                fields_values["rcpt"] = rcpt_to.original.slice(1, -1);
+                fields_values.rcpt = rcpt_to.original.slice(1, -1);
                 break;
             case "srcType" :
-                fields_values["srcType"] = "smtp";
+                fields_values.srcType = "smtp";
                 break;
             case "srcMta" :
-                fields_values["srcMta"] = todo.notes.outbound_helo;
+                fields_values.srcMta = todo.notes.outbound_helo;
                 break;
             case "dlvSourceIp" :
-                fields_values["dlvSourceIp"] = todo.notes.outbound_ip;
+                fields_values.dlvSourceIp = todo.notes.outbound_ip;
                 break;
             case "dlvDestinationIp" :
-                fields_values["dlvDestinationIp"] = " - ";
+                fields_values.dlvDestinationIp = " - ";
                 break;
             case "vmta" :
-                fields_values["vmta"] = server.notes.vmta || " - ";
+                fields_values.vmta = server.notes.vmta || " - ";
                 break;
             case "jobId" :
-                fields_values["jobId"] = todo.uuid;
+                fields_values.jobId = todo.uuid;
                 break;
             case (field.match(/^header_/) || {}).input :
                 fields_values[field] = header.get(field) || " - ";
                 break;
             case "dsnStatus" :
-                fields_values["dsnStatus"] = rcpt_to.dsn_code || rcpt_to.dsn_status;
+                fields_values.dsnStatus = rcpt_to.dsn_code || rcpt_to.dsn_status;
                 break;
             case "dsnDiag" :
-                fields_values["dsnDiag"] = rcpt_to.dsn_smtp_response;
+                fields_values.dsnDiag = rcpt_to.dsn_smtp_response;
                 break;
             case "bounceCat" :
-                fields_values["bounceCat"] = ' - ';
+                fields_values.bounceCat = ' - ';
                 break;
             case "delay" :
-                fields_values["delay"] = params.delay;
+                fields_values.delay = params.delay;
                 break;
         }
     });
@@ -259,55 +259,55 @@ exports.bounce    = function (next, hmail, error) {
 
     var fields_values = {};
 
-    server.notes.bounce_fields.forEach (function(field) {
+    server.notes.bounce_fields.forEach ( function(field) {
         switch (field) {
             case "type" :
-                fields_values["type"] = "b";
+                fields_values.type = "b";
                 break;
             case "timeLogged" :
-                fields_values["timeLogged"] = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
+                fields_values.timeLogged = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
                 break;
             case "timeQueued" :
-                fields_values["timeQueued"] = dateFormat(new Date(todo.queue_time), "yyyy-mm-dd HH:MM:ss");
+                fields_values.timeQueued = dateFormat(new Date(todo.queue_time), "yyyy-mm-dd HH:MM:ss");
                 break;
             case "rcpt" :
-                fields_values["rcpt"] = rcpt_to.original.slice(1, -1);
+                fields_values.rcpt = rcpt_to.original.slice(1, -1);
                 break;
             case "srcType" :
-                fields_values["srcType"] = "smtp";
+                fields_values.srcType = "smtp";
                 break;
             case "srcMta" :
-                fields_values["srcMta"] = todo.notes.outbound_helo;
+                fields_values.srcMta = todo.notes.outbound_helo;
                 break;
             case "dlvSourceIp" :
-                fields_values["dlvSourceIp"] = todo.notes.outbound_ip;
+                fields_values.dlvSourceIp = todo.notes.outbound_ip;
                 break;
             case "dlvDestinationIp" :
-                fields_values["dlvDestinationIp"] = "dlvDestinationIp";
+                fields_values.dlvDestinationIp = "dlvDestinationIp";
                 break;
             case "vmta" :
-                fields_values["vmta"] = server.notes.vmta || " - ";
+                fields_values.vmta = server.notes.vmta || " - ";
                 break;
             case "jobId" :
-                fields_values["jobId"] = todo.uuid;
+                fields_values.jobId = todo.uuid;
                 break;
             case (field.match(/^header_/) || {}).input :
                 fields_values[field] = header.get(field) || " - ";
                 break;
             case "dsnStatus" :
-                fields_values["dsnStatus"] = rcpt_to.dsn_code || rcpt_to.dsn_status;
+                fields_values.dsnStatus = rcpt_to.dsn_code || rcpt_to.dsn_status;
                 break;
             case "dsnDiag" :
                 if ( rcpt_to.hasOwnProperty("dsn_code"))
-                    fields_values["dsnDiag"] = rcpt_to.reason || (rcpt_to.dsn_code + " " + rcpt_to.dsn_msg);
+                    fields_values.dsnDiag = rcpt_to.reason || (rcpt_to.dsn_code + " " + rcpt_to.dsn_msg);
                 else if ( rcpt_to.hasOwnProperty("dsn_smtp_code"))
-                    fields_values["dsnDiag"] = rcpt_to.dsn_smtp_code + " " + rcpt_to.dsn_status + " " + rcpt_to.dsn_smtp_response;
+                    fields_values.dsnDiag = rcpt_to.dsn_smtp_code + " " + rcpt_to.dsn_status + " " + rcpt_to.dsn_smtp_response;
                 else
-                    fields_values["dsnDiag"] = " - ";
+                    fields_values.dsnDiag = " - ";
 
                 break;
             case "bounceCat" :
-                fields_values["bounceCat"] = rcpt_to.reason || (rcpt_to.dsn_code + " (" + rcpt_to.dsn_msg + ")");
+                fields_values.bounceCat = rcpt_to.reason || (rcpt_to.dsn_code + " (" + rcpt_to.dsn_msg + ")");
                 break;
         }
     });
@@ -394,7 +394,7 @@ var createFileIfNotExist = function (filename, fields) {
 var setHeaderFromFields = function (filename, fields) {
     var headers = "";
 
-    fields.forEach(function(field) {
+    fields.forEach ( function(field) {
         headers += field + server.notes.separator;
     });
 
@@ -406,7 +406,7 @@ var addRecord = function (filename, fields, fields_values, type, context) {
     var separator 	= server.notes.separator;
     var record 		= "";
 
-    fields.forEach (function(field) {
+    fields.forEach  ( function(field) {
         record += fields_values[field] + separator;
     });
 
@@ -429,13 +429,13 @@ var moveDirFiles = function (from_dir, to_dir, except, context) {
 
     //Move content
     fs.readdir(from_dir, function(err, files) {
-        files.forEach(function(filename) {
+        files.forEach ( function(filename) {
             if (except.indexOf(filename) == -1) {
-                fs.rename(from_dir + "/" + filename, to_dir + "/" + filename, function (err) {
-                    if (err) {
-                        context.loginfo("Can't move file '" + filename + "' " + err);
-                        throw err;
-                    }else{
+                fs.rename(from_dir + "/" + filename, to_dir + "/" + filename, function (_err) {
+                    if (_err) {
+                        context.loginfo("Can't move file '" + filename + "' " + _err);
+                        throw _err;
+                    } else {
                         context.loginfo("File '" + filename + "' moved");
                     }
                 });
@@ -473,7 +473,7 @@ var checkSizeAndMove = function ( filename, type, context ) {
             if (err) {
                 context.loginfo("Can't move file '" + file_base_name + "' " + err);
                 throw err;
-            }else{
+            } else {
                 context.loginfo("File '" + file_base_name + "' moved");
             }
         });
