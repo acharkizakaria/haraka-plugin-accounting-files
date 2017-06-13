@@ -1,8 +1,9 @@
-    // node.js built-in modules
+// node.js built-in modules
 var assert   = require('assert');
 
 // npm modules
 var fixtures = require('haraka-test-fixtures');
+var path 	 = require("path");
 
 //Default config
 var default_config = {
@@ -47,10 +48,10 @@ describe('Accounting-files plugin', function () {
     });
 });
 
-var next = function () {
+/*var next = function () {
     test.equal(undefined, arguments[0]);
     test.done();
-};
+};*/
 
 describe('Accounting-files config file', function () {
     it('loads "accounting_files.ini" from "config/accounting_files.ini"', function (done) {
