@@ -8,7 +8,7 @@ var path 	 = require("path");
 //Default config
 var default_config = {
     main: {
-        path: path.join(process.env.HARAKA, "accounting_files"),
+        path: process.env.HARAKA?path.join(process.env.HARAKA, 'accounting_files'):'/accounting_files',
         separator: "	",
         files_extension: "tsv",
         default_move_to_dir: "archive",
