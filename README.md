@@ -1,3 +1,8 @@
+[![Build Status][ci-img]][ci-url]
+
+[![NPM][npm-img]][npm-url]
+
+
 ACCOUNTING FILES 
 ========
 
@@ -60,3 +65,8 @@ Once the plugin installed you will notice the creation of the main directories b
 
 
 ## TODO
+
+[ci-img]: https://travis-ci.org/acharkizakaria/haraka-plugin-accounting-files.svg
+[ci-url]: https://travis-ci.org/acharkizakaria/haraka-plugin-accounting-files
+[npm-img]: https://nodei.co/npm/haraka-plugin-accounting-files.png
+[npm-url]: https://www.npmjs.com/package/haraka-plugin-accounting-files
