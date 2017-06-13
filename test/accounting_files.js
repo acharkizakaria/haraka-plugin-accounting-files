@@ -1,5 +1,6 @@
 // node.js built-in modules
 var assert   = require('assert');
+var path 	 = require("path");
 
 // npm modules
 var fixtures = require('haraka-test-fixtures');
@@ -7,7 +8,7 @@ var fixtures = require('haraka-test-fixtures');
 //Default config
 var default_config = {
     main: {
-        path: process.env.HARAKA?path.join(process.env.HARAKA, 'accounting_files'):'/accounting_files',
+        path: '/accounting_files',
         separator: "	",
         files_extension: "tsv",
         default_move_to_dir: "archive",
