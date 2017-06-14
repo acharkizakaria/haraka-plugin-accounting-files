@@ -1,6 +1,6 @@
 // node.js built-in modules
 var assert   = require('assert');
-var path 	 = require("path");
+//var path 	 = require("path");
 
 // npm modules
 var fixtures = require('haraka-test-fixtures');
