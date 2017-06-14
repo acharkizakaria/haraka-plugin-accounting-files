@@ -1,5 +1,5 @@
 [![Build Status][ci-img]][ci-url]
-
+[![GitHub license][gitHub-license-img]][gitHub-license-url]
 [![NPM][npm-img]][npm-url]
 
 
@@ -70,3 +70,5 @@ Once the plugin installed you will notice the creation of the main directories b
 [ci-url]: https://travis-ci.org/acharkizakaria/haraka-plugin-accounting-files
 [npm-img]: https://nodei.co/npm/haraka-plugin-accounting-files.png
 [npm-url]: https://www.npmjs.com/package/haraka-plugin-accounting-files
+[gitHub-license-img]: https://img.shields.io/badge/license-MIT-blue.svg
+[gitHub-license-url]: https://raw.githubusercontent.com/acharkizakaria/haraka-plugin-accounting-files/master/LICENSE
