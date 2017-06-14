@@ -134,9 +134,6 @@ exports.delivered = function (next, hmail, params) {
     var fields_values = {};
 
     server.notes.delivered_fields.forEach ( function (field) {
-
-        plugin.loginfo(field);
-
         switch (field) {
             case "type" :
                 fields_values.type = "d";
