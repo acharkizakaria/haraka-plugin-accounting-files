@@ -28,19 +28,19 @@ exports.register = function () {
 
 //Init plugin
 exports.init_plugin = function (next)  {
-    var context 			= this;
-    var acct_path 			= cfg.main.path || path.join(process.env.HARAKA, "accounting_files");
-    var separator 			= cfg.main.separator || "	";
-    var files_extension		= cfg.main.extension || "tsv";
-    var move_interval_val	= cfg.main.move_interval || 86400;
-    var default_move_to_dir	= "archive";
-    var max_size			= cfg.main.max_size || 200;
+    var context             = this;
+    var acct_path           = cfg.main.path || path.join(process.env.HARAKA, "accounting_files");
+    var separator           = cfg.main.separator || "	";
+    var files_extension     = cfg.main.extension || "tsv";
+    var move_interval_val   = cfg.main.move_interval || 86400;
+    var default_move_to_dir = "archive";
+    var max_size            = cfg.main.max_size || 200;
 
     //Setting global variables to notes
-    server.notes.acct_path 			= acct_path;
-    server.notes.separator 			= separator;
+    server.notes.acct_path          = acct_path;
+    server.notes.separator          = separator;
     server.notes.files_extension 	= files_extension;
-    server.notes.max_size 			= max_size;
+    server.notes.max_size           = max_size;
 
     //Accounting files directories
     if ( cfg.hasOwnProperty("location") ) {
