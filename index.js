@@ -3,8 +3,8 @@
 // documentation via: `haraka -h accounting_files`
 
 //var outbound 	= require("./outbound");
-var fs   		= require("fs");
-var path 		= require("path");
+var fs          = require("fs");
+var path        = require("path");
 var dateFormat 	= require('dateformat');
 var cfg;
 
@@ -39,7 +39,7 @@ exports.init_plugin = function (next)  {
     //Setting global variables to notes
     server.notes.acct_path          = acct_path;
     server.notes.separator          = separator;
-    server.notes.files_extension 	= files_extension;
+    server.notes.files_extension    = files_extension;
     server.notes.max_size           = max_size;
 
     //Accounting files directories
@@ -57,11 +57,11 @@ exports.init_plugin = function (next)  {
     if ( cfg.hasOwnProperty("fields") ) {
         server.notes.delivered_fields	= ( cfg.fields.delivered || "type,timeLogged,timeQueued,rcpt,srcMta,srcIp,vmta,jobId,dsnStatus,dsnMsg" ).split(",");
         server.notes.deferred_fields	= ( cfg.fields.deferred || "type,timeLogged,timeQueued,rcpt,srcMta,srcIp,vmta,jobId,dsnStatus,dsnMsg,delay" ).split(",");
-        server.notes.bounce_fields		= ( cfg.fields.bounce || "type,timeLogged,timeQueued,rcpt,srcMta,srcIp,vmta,jobId,dsnStatus,dsnMsg,bounceCat" ).split(",");
+        server.notes.bounce_fields      = ( cfg.fields.bounce || "type,timeLogged,timeQueued,rcpt,srcMta,srcIp,vmta,jobId,dsnStatus,dsnMsg,bounceCat" ).split(",");
     } else {
         server.notes.delivered_fields	= ["type","timeLogged","timeQueued","rcpt","srcMta","srcIp","vmta","jobId","dsnStatus","dsnMsg"];
         server.notes.deferred_fields	= ["type","timeLogged","timeQueued","rcpt","srcMta","srcIp","vmta","jobId","dsnStatus","dsnMsg","delay"];
-        server.notes.bounce_fields		= ["type","timeLogged","timeQueued","rcpt","srcMta","srcIp","vmta","jobId","dsnStatus","dsnMsg","bounceCat"];
+        server.notes.bounce_fields      = ["type","timeLogged","timeQueued","rcpt","srcMta","srcIp","vmta","jobId","dsnStatus","dsnMsg","bounceCat"];
     }
 
     //-------------------------------------------------------------------------------------------------------
@@ -376,7 +376,7 @@ var GenerateNewFile = function (type){
     else if ( type == 'bounce' ){
         //Set new paths to the notes
         server.notes.bounce_file_path = path.join( server.notes.bounce_dir_path, "b." + dateFormat(new Date(), "yyyy-mm-dd-HHMMss") + "." + server.notes.files_extension);
-        createFileIfNotExist(server.notes.bounce_file_path, server.notes.bounce_fields);		//Create bounce file
+        createFileIfNotExist(server.notes.bounce_file_path, server.notes.bounce_fields);    //Create bounce file
 
         //Return new files names
         return path.basename(server.notes.bounce_file_path);
