@@ -1,7 +1,7 @@
 {
   "name": "haraka-plugin-accounting-files",
-  "version": "0.0.1",
-  "description": "Extraction/Storage/Archiving usefull information from the outbound traffic of the three main types 'Delivered/Deffered/Bounce'.",
+  "version": "0.0.3",
+  "description": "Gives you the ability to extract the useful information from the outbound traffic and manage the storage/archiving of the three main types 'Delivered/Deferred/Bounce'.",
   "main": "index.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint *.js test/*.js",
@@ -34,10 +34,10 @@
     "eslint": "^3.19.0",
     "eslint-plugin-haraka": "^1.0.5",
     "eslint-plugin-node": "^4.2.2",
-    "haraka-test-fixtures": "*",
+    "fs": "*",
+    "haraka-test-fixtures": "^1.0.18",
     "istanbul": "^0.4.5",
     "mocha": "*",
-    "fs": "*",
     "path": "*"
   }
 }

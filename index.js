@@ -2,7 +2,7 @@
 //------------
 // documentation via: `haraka -h accounting_files`
 
-var outbound 	= require("./outbound");
+//var outbound 	= require("./outbound");
 var fs   		= require("fs");
 var path 		= require("path");
 var dateFormat 	= require('dateformat');
@@ -42,7 +42,7 @@ exports.init_plugin = function (next)  {
     server.notes.files_extension 	= files_extension;
     server.notes.max_size 			= max_size;
 
-    //Accounting files directoriers
+    //Accounting files directories
     if ( cfg.hasOwnProperty("location") ) {
         server.notes.delivered_dir_path = path.join(acct_path, ( cfg.location.delivered || "delivered" ));
         server.notes.deferred_dir_path 	= path.join(acct_path, ( cfg.location.deferred || "deferred" ));
@@ -72,13 +72,13 @@ exports.init_plugin = function (next)  {
     createDirectoryIfNotExist(server.notes.bounce_dir_path); 	//Create bounce directory
 
     //Init plugin files with the header fields
-    GenerateNewFile('delivered', context);
-    GenerateNewFile('deferred', context);
-    GenerateNewFile('bounce', context);
+    GenerateNewFile('delivered');
+    GenerateNewFile('deferred');
+    GenerateNewFile('bounce');
 
     //-------------------------------------------------------------------------------------------------------
 
-    //Accounting files "move_to" directoriers if "move" option is enabled
+    //Accounting files "move_to" directories if "move" option is enabled
     if ( cfg.main.hasOwnProperty("move") ) {
         if ( cfg.main.move === "true") {
             var delivered_move_to_dir_name	= default_move_to_dir;
@@ -117,17 +117,18 @@ exports.init_plugin = function (next)  {
 };
 
 exports.set_header_to_note = function (next, connection) {
-    //Setting the header to notes before sent, we will need it in 'delivered/bounce/deferred' hooks to get "header_XXX" parameters
+    //Setting the header to notes before sent, we will need it in 'delivered/bounce/deferred' hooks to get "custom_FIELD" parameters
     connection.transaction.notes.header = connection.transaction.header;
 
     return next();
 };
 
 exports.delivered = function (next, hmail, params) {
-    var plugin = this;
-    var todo = hmail.todo;
-    var header = hmail.notes.header;
-    var rcpt_to = todo.rcpt_to[0];
+    var plugin    = this;
+    var todo      = hmail.todo;
+    var header    = hmail.notes.header;
+    var rcpt_to   = todo.rcpt_to[0];
+
     if (!todo) return next();
 
     var fields_values = {};
@@ -167,29 +168,34 @@ exports.delivered = function (next, hmail, params) {
             case "jobId" :
                 fields_values.jobId = todo.uuid;
                 break;
-            case (field.match(/^header_/) || {}).input :
+            case (field.match(/^custom_/) || {}).input :
                 fields_values[field] = header.get(field) || " - ";
                 break;
             case "dsnStatus" :
-                fields_values.dsnStatus = "";
+                fields_values.dsnStatus = " - ";
                 break;
             case "dsnDiag" :
-                fields_values.dsnDiag = "";
+                fields_values.dsnDiag = " - ";
+                break;
+            case "delay" :
+                fields_values.delay = " - ";
                 break;
         }
     });
 
     addRecord(server.notes.delivered_file_path, server.notes.delivered_fields, fields_values, 'delivered', this);
 
-    this.loginfo("Delivered Record Added.------"+outbound.get_stats());
+    plugin.loginfo("Delivered Record Added.");
 
     return next();
 };
 
-exports.deferred  = function (next, hmail, params) {
-    var todo = hmail.todo;
-    var header = hmail.notes.header;
-    var rcpt_to = todo.rcpt_to[0];
+exports.deferred = function (next, hmail, params) {
+    var plugin   = this;
+    var todo     = hmail.todo;
+    var header   = hmail.notes.header;
+    var rcpt_to  = todo.rcpt_to[0];
+
     if (!todo) return next();
 
     var fields_values = {};
@@ -226,7 +232,7 @@ exports.deferred  = function (next, hmail, params) {
             case "jobId" :
                 fields_values.jobId = todo.uuid;
                 break;
-            case (field.match(/^header_/) || {}).input :
+            case (field.match(/^custom_/) || {}).input :
                 fields_values[field] = header.get(field) || " - ";
                 break;
             case "dsnStatus" :
@@ -236,7 +242,7 @@ exports.deferred  = function (next, hmail, params) {
                 fields_values.dsnDiag = rcpt_to.dsn_smtp_response;
                 break;
             case "bounceCat" :
-                fields_values.bounceCat = ' - ';
+                fields_values.bounceCat = " - ";
                 break;
             case "delay" :
                 fields_values.delay = params.delay;
@@ -246,15 +252,17 @@ exports.deferred  = function (next, hmail, params) {
 
     addRecord(server.notes.deferred_file_path, server.notes.deferred_fields, fields_values, 'deferred', this);
 
-    this.loginfo("Deferred Record Added.");
+    plugin.loginfo("Deferred Record Added.");
 
     return next();
 };
 
-exports.bounce    = function (next, hmail, error) {
-    var todo = hmail.todo;
-    var header = hmail.notes.header;
+exports.bounce  = function (next, hmail, error) {
+    var plugin  = this;
+    var todo    = hmail.todo;
+    var header  = hmail.notes.header;
     var rcpt_to = todo.rcpt_to[0];
+
     if (!todo) return next();
 
     var fields_values = {};
@@ -291,7 +299,7 @@ exports.bounce    = function (next, hmail, error) {
             case "jobId" :
                 fields_values.jobId = todo.uuid;
                 break;
-            case (field.match(/^header_/) || {}).input :
+            case (field.match(/^custom_/) || {}).input :
                 fields_values[field] = header.get(field) || " - ";
                 break;
             case "dsnStatus" :
@@ -309,12 +317,15 @@ exports.bounce    = function (next, hmail, error) {
             case "bounceCat" :
                 fields_values.bounceCat = rcpt_to.reason || (rcpt_to.dsn_code + " (" + rcpt_to.dsn_msg + ")");
                 break;
+            case "delay" :
+                fields_values.delay = " - ";
+                break;
         }
     });
 
     addRecord(server.notes.bounce_file_path, server.notes.bounce_fields, fields_values, 'bounce', this);
 
-    this.loginfo("Bounce Record Added.");
+    plugin.loginfo("Bounce Record Added.");
 
     //Prevent the sending of bounce mail to originating sender
     return next(OK);
@@ -324,7 +335,6 @@ exports.shutdown  = function () {
     //clear the "move_interval" interval if "move_to" is specified in the config files
     if ( cfg.main.hasOwnProperty("move") ) {
         if ( cfg.main.move === "true") {
-            this.loginfo("Clear Move Interval");
             clearInterval(server.notes.move_interval);
         }
     }
@@ -346,7 +356,7 @@ exports.load_accounting_file_ini = function () {
 };
 
 //Generate new files for the 3 types 'delivered/deferred/bounce'
-var GenerateNewFile = function (type, context){
+var GenerateNewFile = function (type){
     if ( type == 'delivered' ){
         //Set new paths to the notes
         server.notes.delivered_file_path = path.join( server.notes.delivered_dir_path, "d." + dateFormat(new Date(), "yyyy-mm-dd-HHMMss") + "." + server.notes.files_extension);
