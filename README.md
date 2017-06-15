@@ -1,20 +1,19 @@
 [![Build Status][ci-img]][ci-url]
 [![GitHub license][gitHub-license-img]][gitHub-license-url]
 [![NPM][npm-img]][npm-url]
-[![NPM][npm-img]][npm-url]
 
 ACCOUNTING FILES 
 ========
 
 Gives you the ability to extract the useful information from the outbound traffic and manage the storage/archiving of the three main types 'Delivered/Deferred/Bounce'.
 
-## Installation
+## INSTALLATION
 
 To enable the plugin in your project you must add the name of the plugin "accounting_files" as a separated line inside the plugins file located inside config directory (`config/plugins`).
 
 You should also place the config file "accounting_files.ini" inside the config directory (More details about the content of this file in the next section).
 
-## Config File
+## CONFIG FILE
 
 The config file "accounting_files.ini" contains several parameters that gives you the possibility to customize your plugin.
 
@@ -47,8 +46,6 @@ The list of available `fields` :
 * **Deferred:**  type,timeLogged,timeQueued,rcpt,srcMta,srcIp,vmta,jobId,dsnStatus,dsnMsg,delay
 * **Bounce:**    type,timeLogged,timeQueued,rcpt,srcMta,srcIp,vmta,jobId,dsnStatus,dsnMsg,bounceCat
     	
-**NOTE:** The config file it self is required for the plugin, but there's no required parameter, what mean you can leave it blank.
-
 **2. Parameters of the `Archiving` mode :**
 
 * ***archiving:*** Enable the archiving of the accounting files (**default:** `false`).
@@ -56,7 +53,7 @@ The list of available `fields` :
 * ***archive_interval:*** The time interval to move the accounting files to 'archive_to' directory (**default:** `86400` second "1 day").
 * ***max_size:*** If the max size of the accounting files is reached the files will be moved to 'archive_to' directory (**default:** `200` Megabyte).
 
-Once the `move` option is enabled in the config file the plugin will move the accounting files to `move_to` directory of all the three types in every `move_interval` or when the file length reach the `max_size`.
+**NOTE:** The config file it self is required for the plugin, but there's no required parameter since all the parameters has a default value (what mean you can leave it blank).
 
 ## INITIALIZATION
 
@@ -66,7 +63,7 @@ Once installed the plugin will wait for the start of HARAKA server to be initial
 
 The first generated directory is the main one that will contain all the plugin outputs, this directory will be created based on the value of the passed parameter `path`. Then inside the previous generated directory the plugin will create separated directory for every type of the three tracked types 'Delivered/Deferred/Bounce' (The name of them will be retrieved from the parameter `location`).
 
-If the **Archiving** mode is enabled, the plugin add an extra directory for the archiving purpose inside the directory of every type (The name of the directories will be the value of config parameter `archive_to`).
+If the **Archiving mode** is enabled, the plugin add an extra directory for the archiving purpose inside the directory of every type (The name of the directories will be the value of config parameter `archive_to`).
 
 **2. Files generation:**
 
@@ -92,6 +89,10 @@ The plugin simply hook the three principal hooks who follows the `send_email` :
 
 Then retrieve the necessary `fields` based on the received arguments of every hook and append the entry to the related file.
 
+<h4>Archiving mode :</h4>
+When this option is enabled in the config file by setting `archiving` parameter to true, the plugin will move the accounting files to `move_to`
+ directory of all the three types in every `move_interval` or when the file length reach the `max_size`.
+ 
 ## NOTE
 
 The plugin will log `[INFO] [-] [accounting_files] Plugin is Ready!` in the console when all the _directories_ and _files_ are generated what
