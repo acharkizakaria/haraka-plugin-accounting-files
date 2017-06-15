@@ -7,6 +7,8 @@
 ACCOUNTING FILES 
 ========
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/acharkizakaria/haraka-plugin-accounting-files.svg)](https://greenkeeper.io/)
+
 Gives you the ability to extract the useful information from the outbound traffic and manage the storage/archiving of the three main types 'Delivered/Deferred/Bounce'.
 
 ## INSTALLATION
