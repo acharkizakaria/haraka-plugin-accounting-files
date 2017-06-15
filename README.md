@@ -1,13 +1,11 @@
+ACCOUNTING FILES 
+========
 [![Build Status][ci-img]][ci-url]
 [![GitHub license][gitHub-license-img]][gitHub-license-url]
 [![Code Climate][clim-img]][clim-url]
+[![Greenkeeper badge][greenkeeper-img]][greenkeeper-url]
 
 [![NPM][npm-img]][npm-url]
-
-ACCOUNTING FILES 
-========
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/acharkizakaria/haraka-plugin-accounting-files.svg)](https://greenkeeper.io/)
 
 Gives you the ability to extract the useful information from the outbound traffic and manage the storage/archiving of the three main types 'Delivered/Deferred/Bounce'.
 
@@ -115,3 +113,5 @@ The plugin will log `[INFO] [-] [accounting_files] Plugin is Ready!` in the cons
 [gitHub-license-url]: https://raw.githubusercontent.com/acharkizakaria/haraka-plugin-accounting-files/master/LICENSE
 [clim-img]: https://codeclimate.com/github/acharkizakaria/haraka-plugin-accounting-files/badges/gpa.svg
 [clim-url]: https://codeclimate.com/github/acharkizakaria/haraka-plugin-accounting-files
+[greenkeeper-img]: https://badges.greenkeeper.io/acharkizakaria/haraka-plugin-accounting-files.svg
+[greenkeeper-url]: https://greenkeeper.io/
