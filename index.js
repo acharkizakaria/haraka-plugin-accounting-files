@@ -453,8 +453,9 @@ var moveDirFiles = function (from_dir, to_dir, except, context) {
 
 //Get the size of the passed filename in megabyte
 var getFileSizeInMegabyte = function ( filename ) {
-    const stats = fs.statSync(filename);
-    const fileSizeInBytes = stats.size;
+    var stats = fs.statSync(filename);
+    var fileSizeInBytes = stats.size;
+
     return fileSizeInBytes / 1000000.0;
 };
 
