@@ -24,7 +24,7 @@ The config file "accounting_files.ini" contains several parameters that gives yo
 * ***path:*** Path of the directory where you want to store the output files (**default:** `/accounting_files` folder inside current HARAKA installation directory). 
 * ***extension:*** The extension of the files (**default:** `tsv`).
 * ***separator:*** The separator of the fields inside the files (**default:** tabulation).
-* ***location:*** Custom names of the three directories 'Delivered/Deferred/Bounce' inside inside the `path`.
+* ***location:*** Custom names of the three directories 'Delivered/Deferred/Bounce' inside the `path`.
 * ***fields:*** The list of fields you want to retrieve for every type(**default:** check the list bellow).
 	
 The list of available `fields` :
