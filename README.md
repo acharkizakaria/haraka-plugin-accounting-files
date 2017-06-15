@@ -1,5 +1,7 @@
 [![Build Status][ci-img]][ci-url]
 [![GitHub license][gitHub-license-img]][gitHub-license-url]
+[![Code Climate][clim-img]][clim-url]
+
 [![NPM][npm-img]][npm-url]
 
 ACCOUNTING FILES 
@@ -90,12 +92,13 @@ The plugin simply hook the three principal hooks who follows the `send_email` :
 Then retrieve the necessary `fields` based on the received arguments of every hook and append the entry to the related file.
 
 <h4>Archiving mode :</h4>
-When this option is enabled in the config file by setting `archiving` parameter to true, the plugin will move the accounting files to `move_to`
- directory of all the three types in every `move_interval` or when the file length reach the `max_size`.
+
+When this option is enabled in the config file by setting `archiving` parameter to _true_, the plugin will move all the accounting files to `move_to`
+ directory of the three types in every `move_interval` or when the file length reach the `max_size`.
  
 ## NOTE
 
-The plugin will log `[INFO] [-] [accounting_files] Plugin is Ready!` in the console when all the _directories_ and _files_ are generated what
+The plugin will log `[INFO] [-] [accounting_files] Plugin is Ready!` in the console when all the _directories_ and _files_ are well generated what
  mean all goes right.
 
 ## TODO
@@ -108,3 +111,5 @@ The plugin will log `[INFO] [-] [accounting_files] Plugin is Ready!` in the cons
 [npm-url]: https://www.npmjs.com/package/haraka-plugin-accounting-files
 [gitHub-license-img]: https://img.shields.io/badge/license-MIT-blue.svg
 [gitHub-license-url]: https://raw.githubusercontent.com/acharkizakaria/haraka-plugin-accounting-files/master/LICENSE
+[clim-img]: https://codeclimate.com/github/acharkizakaria/haraka-plugin-accounting-files/badges/gpa.svg
+[clim-url]: https://codeclimate.com/github/acharkizakaria/haraka-plugin-accounting-files
