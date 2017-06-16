@@ -25,7 +25,7 @@ The config file "accounting_files.ini" contains several parameters that gives yo
 * ***extension:*** The extension of the output files (**default:** `tsv`).
 * ***separator:*** The separator of the fields inside the files (**default:** tabulation).
 * ***location:*** Custom names of the three directories 'Delivered/Deferred/Bounce' inside the `path`.
-* ***fields:*** The list of fields you want to retrieve for every type (**default:** [Check the list below](https://github.com/acharkizakaria/haraka-plugin-accounting-files/blob/master/README.md#user-content-fields-list)).
+* ***fields:*** The list of fields you want to retrieve for every type (**default:** [Check the list below](#user-content-fields-list)).
 	
 	* ***type:*** The type of the entry (`d` for delivered, `df` for deferred, `b` for bounce)
 	* ***timeLogged:*** Represent the time when the entry is logged to the file.
@@ -58,13 +58,13 @@ The config file "accounting_files.ini" contains several parameters that gives yo
 
 Once installed, the plugin will wait for the start of HARAKA server to be initialized, by reading the config file and checking if the necessary _directories_ are already exist.
 
-There's two cases, if the plugin was already enabled it will create just the _files_ at the start, if it's enabled for the first time, it will setUp the environment by triggering the generation of the all necessary [_directories_](https://github.com/acharkizakaria/haraka-plugin-accounting-files/blob/master/README.md#user-content-directories) and [_files_](#user-content-files).
+There's two cases, if the plugin was already enabled it will create just the _files_ at the start, if it's enabled for the first time, it will setUp the environment by triggering the generation of the all necessary [_directories_](#user-content-directories) and [_files_](#user-content-files).
  
 <b id="directories">1. Directories generation:</b>
 
 The first generated directory is the main one that will contain all the plugin content, this directory will be created based on the value of the passed parameter `path`. Inside the previous generated directory the plugin will create a separated directory for every type of the three tracked types 'Delivered/Deferred/Bounce' (The name of these directories will be retrieved from the config parameter `location`).
 
-If the [**Archiving mode**](https://github.com/acharkizakaria/haraka-plugin-accounting-files/blob/master/README.md#user-content-archiving-mode) is enabled, the plugin will add an extra directory for the archiving purpose inside the directory of every type (The name of the directories will be the value of config parameter `archive_to`).
+If the [**Archiving mode**](#user-content-archiving-mode) is enabled, the plugin will add an extra directory for the archiving purpose inside the directory of every type (The name of the directories will be the value of config parameter `archive_to`).
 
 <b id="files">2. Files generation:</b>
 
