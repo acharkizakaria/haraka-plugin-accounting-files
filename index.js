@@ -28,13 +28,13 @@ exports.register = function () {
 
 //Init plugin
 exports.init_plugin = function (next)  {
-    var context             = this;
-    var acct_path           = cfg.main.path || path.join(process.env.HARAKA, "accounting_files");
-    var separator           = cfg.main.separator || "	";
-    var files_extension     = cfg.main.extension || "tsv";
-    var move_interval_val   = cfg.main.move_interval || 86400;
-    var default_move_to_dir = "archive";
-    var max_size            = cfg.main.max_size || 200;
+    var context                 = this;
+    var acct_path               = cfg.main.path || path.join(process.env.HARAKA, "accounting_files");
+    var separator               = cfg.main.separator || "	";
+    var files_extension         = cfg.main.extension || "tsv";
+    var archive_interval_val    = cfg.main.archive_interval || 86400;
+    var default_archive_to_dir  = "archive";
+    var max_size                = cfg.main.max_size || 200;
 
     //Setting global variables to notes
     server.notes.acct_path          = acct_path;
@@ -78,36 +78,36 @@ exports.init_plugin = function (next)  {
 
     //-------------------------------------------------------------------------------------------------------
 
-    //Accounting files "move_to" directories if "move" option is enabled
-    if ( cfg.main.hasOwnProperty("move") ) {
-        if ( cfg.main.move === "true") {
-            var delivered_move_to_dir_name	= default_move_to_dir;
-            var deferred_move_to_dir_name 	= default_move_to_dir;
-            var bounce_move_to_dir_name 	= default_move_to_dir;
+    //Accounting files "archive_to" directories if "archiving" option is enabled
+    if ( cfg.main.hasOwnProperty("archiving") ) {
+        if ( cfg.main.archiving === "true") {
+            var delivered_archive_to_dir_name	= default_archive_to_dir;
+            var deferred_archive_to_dir_name 	= default_archive_to_dir;
+            var bounce_archive_to_dir_name 	= default_archive_to_dir;
 
-            if ( cfg.hasOwnProperty("move_to") ) {
-                delivered_move_to_dir_name	= cfg.move_to.delivered || default_move_to_dir;
-                deferred_move_to_dir_name 	= cfg.move_to.deferred || default_move_to_dir;
-                bounce_move_to_dir_name 	= cfg.move_to.bounce || default_move_to_dir;
+            if ( cfg.hasOwnProperty("archive_to") ) {
+                delivered_archive_to_dir_name	= cfg.archive_to.delivered || default_archive_to_dir;
+                deferred_archive_to_dir_name 	= cfg.archive_to.deferred || default_archive_to_dir;
+                bounce_archive_to_dir_name 	= cfg.archive_to.bounce || default_archive_to_dir;
             }
         }
 
-        server.notes.delivered_move_to_dir_path	= path.join( server.notes.delivered_dir_path, delivered_move_to_dir_name);
-        server.notes.deferred_move_to_dir_path 	= path.join( server.notes.deferred_dir_path, deferred_move_to_dir_name);
-        server.notes.bounce_move_to_dir_path  	= path.join( server.notes.bounce_dir_path, bounce_move_to_dir_name);
+        server.notes.delivered_archive_to_dir_path	= path.join( server.notes.delivered_dir_path, delivered_archive_to_dir_name);
+        server.notes.deferred_archive_to_dir_path 	= path.join( server.notes.deferred_dir_path, deferred_archive_to_dir_name);
+        server.notes.bounce_archive_to_dir_path  	= path.join( server.notes.bounce_dir_path, bounce_archive_to_dir_name);
 
-        if ( cfg.main.move === "true") {
-            //Init plugin 'move' directories
-            createDirectoryIfNotExist( server.notes.delivered_move_to_dir_path );	//Create delivered move to directory
-            createDirectoryIfNotExist( server.notes.deferred_move_to_dir_path );	//Create deferred move to directory
-            createDirectoryIfNotExist( server.notes.bounce_move_to_dir_path );		//Create bounce move to directory
+        if ( cfg.main.archiving === "true") {
+            //Init plugin 'archiving' directories
+            createDirectoryIfNotExist( server.notes.delivered_archive_to_dir_path );	//Create delivered archiving to directory
+            createDirectoryIfNotExist( server.notes.deferred_archive_to_dir_path );	//Create deferred archiving to directory
+            createDirectoryIfNotExist( server.notes.bounce_archive_to_dir_path );		//Create bounce archiving to directory
 
-            //Set move interval if "move_to" is specified in config files
-            server.notes.move_interval = setInterval( function () {
-                moveDirFiles( server.notes.delivered_dir_path, server.notes.delivered_move_to_dir_path, [delivered_move_to_dir_name], context); 	//Move delivered files
-                moveDirFiles( server.notes.deferred_dir_path, server.notes.deferred_move_to_dir_path, [deferred_move_to_dir_name], context); 		//Move deferred files
-                moveDirFiles( server.notes.bounce_dir_path, server.notes.bounce_move_to_dir_path, [bounce_move_to_dir_name], context); 				//Move bounce files
-            }, move_interval_val * 1000 );
+            //Set archiving interval if "archive_to" is specified in config files
+            server.notes.archive_interval = setInterval( function () {
+                archivingDirFiles( server.notes.delivered_dir_path, server.notes.delivered_archive_to_dir_path, [delivered_archive_to_dir_name], context); 	//Archiving delivered files
+                archivingDirFiles( server.notes.deferred_dir_path, server.notes.deferred_archive_to_dir_path, [deferred_archive_to_dir_name], context); 		//Archiving deferred files
+                archivingDirFiles( server.notes.bounce_dir_path, server.notes.bounce_archive_to_dir_path, [bounce_archive_to_dir_name], context); 				//Archiving bounce files
+            }, archive_interval_val * 1000 );
         }
     }
 
@@ -329,10 +329,10 @@ exports.bounce  = function (next, hmail, error) {
 };
 
 exports.shutdown  = function () {
-    //clear the "move_interval" interval if "move_to" is specified in the config files
-    if ( cfg.main.hasOwnProperty("move") ) {
-        if ( cfg.main.move === "true") {
-            clearInterval(server.notes.move_interval);
+    //clear the "archive_interval" interval if "archive_to" is specified in the config files
+    if ( cfg.main.hasOwnProperty("archiving") ) {
+        if ( cfg.main.archiving === "true") {
+            clearInterval(server.notes.archive_interval);
         }
     }
 };
@@ -423,27 +423,27 @@ var addRecord = function (filename, fields, fields_values, type, context) {
 };
 
 //Move all the content of 'from_dir' directory to 'to_dir' directory except the 'files/directories' passed in the 'except' array
-var moveDirFiles = function (from_dir, to_dir, except, context) {
-    //Generate new files and switch to them before the move so the logging ofthe data will not stop
+var archivingDirFiles = function (from_dir, to_dir, except, context) {
+    //Generate new files and switch to them before the archiving so the logging of the data will not stop
     var new_files = [];
 
     new_files.push( GenerateNewFile('delivered', context) );
     new_files.push( GenerateNewFile('deferred', context) );
     new_files.push( GenerateNewFile('bounce', context) );
 
-    //Add new files names 'except' array to exclude them from the move
+    //Add new files names 'except' array to exclude them from the archiving
     except = except.concat(new_files);
 
-    //Move content
+    //archiving content
     fs.readdir(from_dir, function (err, files) {
         files.forEach ( function (filename) {
             if (except.indexOf(filename) == -1) {
                 fs.rename(from_dir + "/" + filename, to_dir + "/" + filename, function (_err) {
                     if (_err) {
-                        context.loginfo("Can't move file '" + filename + "' " + _err);
+                        context.loginfo("Can't archive file '" + filename + "' " + _err);
                         throw _err;
                     } else {
-                        context.loginfo("File '" + filename + "' moved");
+                        context.loginfo("File '" + filename + "' Archived");
                     }
                 });
             }
@@ -464,20 +464,20 @@ var checkSizeAndMove = function ( filename, type, context ) {
     var file_size	 = getFileSizeInMegabyte(filename);
 
     if ( file_size >= server.notes.max_size ) {
-        var move_to_path = '';
+        var archive_to_path = '';
         var file_base_name = path.basename(filename);
 
         if ( type == 'delivered' )
-            move_to_path = server.notes.delivered_move_to_dir_path;
+            archive_to_path = server.notes.delivered_archive_to_dir_path;
         else if ( type == 'deferred' )
-            move_to_path = server.notes.deferred_move_to_dir_path;
+            archive_to_path = server.notes.deferred_archive_to_dir_path;
         else if ( type == 'bounce' )
-            move_to_path = server.notes.bounce_move_to_dir_path;
+            archive_to_path = server.notes.bounce_archive_to_dir_path;
 
         //Generate and switch to new file that will replace the moved one
         GenerateNewFile(type, context);
 
-        fs.rename(filename, move_to_path + "/" + file_base_name, function (err) {
+        fs.rename(filename, archive_to_path + "/" + file_base_name, function (err) {
             if (err) {
                 context.loginfo("Can't move file '" + file_base_name + "' " + err);
                 throw err;
