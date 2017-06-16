@@ -58,7 +58,7 @@ The config file "accounting_files.ini" contains several parameters that gives yo
 
 Once installed, the plugin will wait for the start of HARAKA server to be initialized, by reading the config file and checking if the necessary _directories_ are already exist.
 
-There's two cases, if the plugin was already enabled it will create just the _files_ at the start, if it's enabled for the first time, it will setUp the environment by triggering the generation of the all necessary [_directories_](https://github.com/acharkizakaria/haraka-plugin-accounting-files/blob/master/README.md#user-content-directories) and [_files_](https://github.com/acharkizakaria/haraka-plugin-accounting-files/blob/master/README.md#user-content-directories).
+There's two cases, if the plugin was already enabled it will create just the _files_ at the start, if it's enabled for the first time, it will setUp the environment by triggering the generation of the all necessary [_directories_](https://github.com/acharkizakaria/haraka-plugin-accounting-files/blob/master/README.md#user-content-directories) and [_files_](#user-content-files).
  
 <b id="directories">1. Directories generation:</b>
 
