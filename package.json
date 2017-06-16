@@ -1,6 +1,6 @@
 {
   "name": "haraka-plugin-accounting-files",
-  "version": "0.1.3",
+  "version": "0.3.3",
   "description": "Gives you the ability to extract the useful information from the outbound traffic and manage the storage/archiving of the three main types 'Delivered/Deferred/Bounce'.",
   "main": "index.js",
   "scripts": {
