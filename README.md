@@ -7,7 +7,7 @@ ACCOUNTING FILES
 
 [![NPM][npm-img]][npm-url]
 
-Gives you the ability to extract the useful information from the outbound traffic and manage the storage/archiving of the three main types 'Delivered/Deferred/Bounce'.
+The ACCOUNTING FILES plugin gives you the ability to extract the useful/custom information from the outbound traffic and manage the 'storage/archiving' of the three main types 'Delivered/Deferred/Bounce'.
 
 ## INSTALLATION
 
@@ -25,7 +25,7 @@ The config file "accounting_files.ini" contains several parameters that gives yo
 * ***extension:*** The extension of the files (**default:** `tsv`).
 * ***separator:*** The separator of the fields inside the files (**default:** tabulation).
 * ***location:*** Custom names of the three directories 'Delivered/Deferred/Bounce' inside the `path`.
-* ***fields:*** The list of fields you want to retrieve for every type(**default:** check the list bellow).
+* ***fields:*** The list of fields you want to retrieve for every type (**default:** check the [list below](https://github.com/acharkizakaria/haraka-plugin-accounting-files/blob/master/README.md#fields_list)).
 	
 The list of available `fields` :
 
@@ -43,7 +43,7 @@ The list of available `fields` :
 * ***custom_FIELD:*** Gives you the ability of logging custom/dynamic fields (`FIELD` should be replaced by the name of the custom field you wish to log).
 * ***vmta:*** The virtual MTA name (If [VMTA](https://github.com/haraka/haraka-plugin-vmta) plugin is used).
 
-**INFO:** List of the **default** fields for every type :
+<span id="fields_list">**INFO:** List of the **default** fields for every type :</span>
 * **Delivered:** type,timeLogged,timeQueued,rcpt,srcMta,srcIp,vmta,jobId,dsnStatus,dsnMsg
 * **Deferred:**  type,timeLogged,timeQueued,rcpt,srcMta,srcIp,vmta,jobId,dsnStatus,dsnMsg,delay
 * **Bounce:**    type,timeLogged,timeQueued,rcpt,srcMta,srcIp,vmta,jobId,dsnStatus,dsnMsg,bounceCat
