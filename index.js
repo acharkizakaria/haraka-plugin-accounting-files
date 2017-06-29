@@ -153,11 +153,11 @@ exports.delivered = function (next, hmail, params) {
             case "srcMta" :
                 fields_values.srcMta = todo.notes.outbound_helo;
                 break;
-            case "dlvSourceIp" :
-                fields_values.dlvSourceIp = todo.notes.outbound_ip;
+            case "srcIp" :
+                fields_values.srcIp = todo.notes.outbound_ip;
                 break;
-            case "dlvDestinationIp" :
-                fields_values.dlvDestinationIp = params[1] || " - ";
+            case "destIp" :
+                fields_values.destIp = params[1] || " - ";
                 break;
             case "vmta" :
                 fields_values.vmta = server.notes.vmta || " - ";
@@ -171,8 +171,8 @@ exports.delivered = function (next, hmail, params) {
             case "dsnStatus" :
                 fields_values.dsnStatus = " - ";
                 break;
-            case "dsnDiag" :
-                fields_values.dsnDiag = " - ";
+            case "dsnMsg" :
+                fields_values.dsnMsg = " - ";
                 break;
             case "delay" :
                 fields_values.delay = " - ";
@@ -217,11 +217,11 @@ exports.deferred = function (next, hmail, params) {
             case "srcMta" :
                 fields_values.srcMta = todo.notes.outbound_helo;
                 break;
-            case "dlvSourceIp" :
-                fields_values.dlvSourceIp = todo.notes.outbound_ip;
+            case "srcIp" :
+                fields_values.srcIp = todo.notes.outbound_ip;
                 break;
-            case "dlvDestinationIp" :
-                fields_values.dlvDestinationIp = " - ";
+            case "destIp" :
+                fields_values.destIp = " - ";
                 break;
             case "vmta" :
                 fields_values.vmta = server.notes.vmta || " - ";
@@ -235,8 +235,8 @@ exports.deferred = function (next, hmail, params) {
             case "dsnStatus" :
                 fields_values.dsnStatus = rcpt_to.dsn_code || rcpt_to.dsn_status;
                 break;
-            case "dsnDiag" :
-                fields_values.dsnDiag = rcpt_to.dsn_smtp_response;
+            case "dsnMsg" :
+                fields_values.dsnMsg = rcpt_to.dsn_smtp_response;
                 break;
             case "bounceCat" :
                 fields_values.bounceCat = " - ";
@@ -284,11 +284,11 @@ exports.bounce  = function (next, hmail, error) {
             case "srcMta" :
                 fields_values.srcMta = todo.notes.outbound_helo;
                 break;
-            case "dlvSourceIp" :
-                fields_values.dlvSourceIp = todo.notes.outbound_ip;
+            case "srcIp" :
+                fields_values.srcIp = todo.notes.outbound_ip;
                 break;
-            case "dlvDestinationIp" :
-                fields_values.dlvDestinationIp = "dlvDestinationIp";
+            case "destIp" :
+                fields_values.destIp = "destIp";
                 break;
             case "vmta" :
                 fields_values.vmta = server.notes.vmta || " - ";
@@ -302,13 +302,13 @@ exports.bounce  = function (next, hmail, error) {
             case "dsnStatus" :
                 fields_values.dsnStatus = rcpt_to.dsn_code || rcpt_to.dsn_status;
                 break;
-            case "dsnDiag" :
+            case "dsnMsg" :
                 if ( rcpt_to.hasOwnProperty("dsn_code"))
-                    fields_values.dsnDiag = rcpt_to.reason || (rcpt_to.dsn_code + " " + rcpt_to.dsn_msg);
+                    fields_values.dsnMsg = rcpt_to.reason || (rcpt_to.dsn_code + " " + rcpt_to.dsn_msg);
                 else if ( rcpt_to.hasOwnProperty("dsn_smtp_code"))
-                    fields_values.dsnDiag = rcpt_to.dsn_smtp_code + " " + rcpt_to.dsn_status + " " + rcpt_to.dsn_smtp_response;
+                    fields_values.dsnMsg = rcpt_to.dsn_smtp_code + " " + rcpt_to.dsn_status + " " + rcpt_to.dsn_smtp_response;
                 else
-                    fields_values.dsnDiag = " - ";
+                    fields_values.dsnMsg = " - ";
 
                 break;
             case "bounceCat" :
