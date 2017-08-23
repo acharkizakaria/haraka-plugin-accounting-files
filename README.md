@@ -19,7 +19,7 @@ You should also place the config file "accounting_files.ini" inside the config d
 
 The config file "accounting_files.ini" contains several parameters that gives you the possibility to customize your plugin.
 
-**1. Parameters of the `information Log` :**
+<b>1. Parameters of the `information Log` :</b>
 
 * ***path:*** Path of the directory where you want to store the output files (**default:** `/accounting_files` folder inside current HARAKA installation directory). 
 * ***extension:*** The extension of the output files (**default:** `tsv`).
@@ -47,7 +47,7 @@ The config file "accounting_files.ini" contains several parameters that gives yo
 * **Deferred:**  type,timeLogged,timeQueued,rcpt,srcMta,srcIp,vmta,jobId,dsnStatus,dsnMsg,delay
 * **Bounce:**    type,timeLogged,timeQueued,rcpt,srcMta,srcIp,vmta,jobId,dsnStatus,dsnMsg,bounceCat
     	
-**2. Parameters of the `Archiving mode` :**
+<b>2. Parameters of the `Archiving mode` :</b>
 
 * ***archiving:*** Enable the archiving of the accounting files (**default:** `false`).
 * ***archive_to:*** Name of the directory where to move the accounting files (**default:** `archive` folder inside every type).
