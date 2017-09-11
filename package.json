@@ -37,7 +37,7 @@
     "fs": "*",
     "haraka-test-fixtures": "^1.0.20",
     "istanbul": "^0.4.5",
-    "mocha": ">=3.5.0",
+    "mocha": ">=3.5.3",
     "path": "*"
   }
 }
