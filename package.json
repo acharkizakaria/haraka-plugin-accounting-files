@@ -32,7 +32,7 @@
     "assert": "*",
     "coveralls": "^2.13.0",
     "eslint": "^4.6.1",
-    "eslint-plugin-haraka": "^1.0.6",
+    "eslint-plugin-haraka": "^1.0.8",
     "eslint-plugin-node": "^5.0.0",
     "fs": "*",
     "haraka-test-fixtures": "^1.0.20",
