@@ -2,14 +2,14 @@
 //------------
 // documentation via: `haraka -h accounting_files`
 
-//var outbound 	= require("./outbound");
-var fs          = require("fs");
-var path        = require("path");
-var dateFormat 	= require('dateformat');
-var cfg;
+//let outbound 	= require("./outbound");
+let fs          = require("fs");
+let path        = require("path");
+let dateFormat 	= require('dateformat');
+let cfg;
 
 exports.register = function () {
-    var plugin = this;
+    let plugin = this;
 
     plugin.load_accounting_file_ini();
 
@@ -28,13 +28,13 @@ exports.register = function () {
 
 //Init plugin
 exports.init_plugin = function (next)  {
-    var context                 = this;
-    var acct_path               = cfg.main.path || path.join(process.env.HARAKA, "accounting_files");
-    var separator               = cfg.main.separator || "	";
-    var files_extension         = cfg.main.extension || "tsv";
-    var archive_interval_val    = cfg.main.archive_interval || 86400;
-    var default_archive_to_dir  = "archive";
-    var max_size                = cfg.main.max_size || 200;
+    let context                 = this;
+    let acct_path               = cfg.main.path || path.join(process.env.HARAKA, "accounting_files");
+    let separator               = cfg.main.separator || "	";
+    let files_extension         = cfg.main.extension || "tsv";
+    let archive_interval_val    = cfg.main.archive_interval || 86400;
+    let default_archive_to_dir  = "archive";
+    let max_size                = cfg.main.max_size || 200;
 
     //Setting global variables to notes
     server.notes.acct_path          = acct_path;
@@ -81,9 +81,9 @@ exports.init_plugin = function (next)  {
     //Accounting files "archive_to" directories if "archiving" option is enabled
     if ( cfg.main.hasOwnProperty("archiving") ) {
         if ( cfg.main.archiving === "true") {
-            var delivered_archive_to_dir_name	= default_archive_to_dir;
-            var deferred_archive_to_dir_name 	= default_archive_to_dir;
-            var bounce_archive_to_dir_name 	= default_archive_to_dir;
+            let delivered_archive_to_dir_name	= default_archive_to_dir;
+            let deferred_archive_to_dir_name 	= default_archive_to_dir;
+            let bounce_archive_to_dir_name 	= default_archive_to_dir;
 
             if ( cfg.hasOwnProperty("archive_to") ) {
                 delivered_archive_to_dir_name	= cfg.archive_to.delivered || default_archive_to_dir;
@@ -124,14 +124,14 @@ exports.set_header_to_note = function (next, connection) {
 };
 
 exports.delivered = function (next, hmail, params) {
-    var plugin    = this;
-    var todo      = hmail.todo;
-    var header    = hmail.notes.header;
-    var rcpt_to   = todo.rcpt_to[0];
+    let plugin    = this;
+    let todo      = hmail.todo;
+    let header    = hmail.notes.header;
+    let rcpt_to   = todo.rcpt_to[0];
 
     if (!todo) return next();
 
-    var fields_values = {};
+    let fields_values = {};
 
     server.notes.delivered_fields.forEach ( function (field) {
         switch (field) {
@@ -188,14 +188,14 @@ exports.delivered = function (next, hmail, params) {
 };
 
 exports.deferred = function (next, hmail, params) {
-    var plugin   = this;
-    var todo     = hmail.todo;
-    var header   = hmail.notes.header;
-    var rcpt_to  = todo.rcpt_to[0];
+    let plugin   = this;
+    let todo     = hmail.todo;
+    let header   = hmail.notes.header;
+    let rcpt_to  = todo.rcpt_to[0];
 
     if (!todo) return next();
 
-    var fields_values = {};
+    let fields_values = {};
 
     server.notes.deferred_fields.forEach ( function (field) {
         switch (field) {
@@ -255,14 +255,14 @@ exports.deferred = function (next, hmail, params) {
 };
 
 exports.bounce  = function (next, hmail, error) {
-    var plugin  = this;
-    var todo    = hmail.todo;
-    var header  = hmail.notes.header;
-    var rcpt_to = todo.rcpt_to[0];
+    let plugin  = this;
+    let todo    = hmail.todo;
+    let header  = hmail.notes.header;
+    let rcpt_to = todo.rcpt_to[0];
 
     if (!todo) return next();
 
-    var fields_values = {};
+    let fields_values = {};
 
     server.notes.bounce_fields.forEach ( function (field) {
         switch (field) {
@@ -343,7 +343,7 @@ exports.shutdown  = function () {
 
 //Load configuration file
 exports.load_accounting_file_ini = function () {
-    var plugin = this;
+    let plugin = this;
 
     plugin.loginfo("Accounting_file configs are fully loaded from 'accounting_files.ini'.");
     cfg = plugin.config.get("accounting_files.ini", function () {
@@ -353,7 +353,7 @@ exports.load_accounting_file_ini = function () {
 };
 
 //Generate new files for the 3 types 'delivered/deferred/bounce'
-var GenerateNewFile = function (type){
+let GenerateNewFile = function (type){
     if ( type == 'delivered' ){
         //Set new paths to the notes
         server.notes.delivered_file_path = path.join( server.notes.delivered_dir_path, "d." + dateFormat(new Date(), "yyyy-mm-dd-HHMMss") + "." + server.notes.files_extension);
@@ -381,14 +381,14 @@ var GenerateNewFile = function (type){
 };
 
 //Create directory if not exist
-var createDirectoryIfNotExist = function (dir_name) {
+let createDirectoryIfNotExist = function (dir_name) {
     if ( !fs.existsSync(dir_name) ) {
         fs.mkdirSync(dir_name);
     }
 };
 
 //Create file if not exist and add the file header from the passed fields
-var createFileIfNotExist = function (filename, fields) {
+let createFileIfNotExist = function (filename, fields) {
     if ( !fs.existsSync(filename) ) {
         fs.writeFileSync(filename);
 
@@ -398,8 +398,8 @@ var createFileIfNotExist = function (filename, fields) {
 };
 
 //Set Header to file from fields
-var setHeaderFromFields = function (filename, fields) {
-    var headers = "";
+let setHeaderFromFields = function (filename, fields) {
+    let headers = "";
 
     fields.forEach ( function (field) {
         headers += field + server.notes.separator;
@@ -409,9 +409,9 @@ var setHeaderFromFields = function (filename, fields) {
 };
 
 //Add new record to the passed accounting file in parameters
-var addRecord = function (filename, fields, fields_values, type, context) {
-    var separator 	= server.notes.separator;
-    var record 		= "";
+let addRecord = function (filename, fields, fields_values, type, context) {
+    let separator 	= server.notes.separator;
+    let record 		= "";
 
     fields.forEach  ( function (field) {
         record += fields_values[field] + separator;
@@ -423,9 +423,9 @@ var addRecord = function (filename, fields, fields_values, type, context) {
 };
 
 //Move all the content of 'from_dir' directory to 'to_dir' directory except the 'files/directories' passed in the 'except' array
-var archivingDirFiles = function (from_dir, to_dir, except, context) {
+let archivingDirFiles = function (from_dir, to_dir, except, context) {
     //Generate new files and switch to them before the archiving so the logging of the data will not stop
-    var new_files = [];
+    let new_files = [];
 
     new_files.push( GenerateNewFile('delivered', context) );
     new_files.push( GenerateNewFile('deferred', context) );
@@ -452,20 +452,20 @@ var archivingDirFiles = function (from_dir, to_dir, except, context) {
 };
 
 //Get the size of the passed filename in megabyte
-var getFileSizeInMegabyte = function ( filename ) {
-    var stats = fs.statSync(filename);
-    var fileSizeInBytes = stats.size;
+let getFileSizeInMegabyte = function ( filename ) {
+    let stats = fs.statSync(filename);
+    let fileSizeInBytes = stats.size;
 
     return fileSizeInBytes / 1000000.0;
 };
 
 //Check the size of the file if it's greater or equals to 'max_size' archive the file to the related directory and generate a new file
-var checkSizeAndMove = function ( filename, type, context ) {
-    var file_size	 = getFileSizeInMegabyte(filename);
+let checkSizeAndMove = function ( filename, type, context ) {
+    let file_size	 = getFileSizeInMegabyte(filename);
 
     if ( file_size >= server.notes.max_size ) {
-        var archive_to_path = '';
-        var file_base_name = path.basename(filename);
+        let archive_to_path = '';
+        let file_base_name = path.basename(filename);
 
         if ( type == 'delivered' )
             archive_to_path = server.notes.delivered_archive_to_dir_path;
