@@ -35,7 +35,7 @@
     "eslint-plugin-haraka": "^1.0.9",
     "eslint-plugin-node": "^5.0.0",
     "fs": "*",
-    "haraka-test-fixtures": "^1.0.20",
+    "haraka-test-fixtures": "^1.0.22",
     "istanbul": "^0.4.5",
     "mocha": ">=3.5.3",
     "path": "*"
