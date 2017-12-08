@@ -31,7 +31,7 @@
   "devDependencies": {
     "assert": "*",
     "coveralls": "^3.0.0",
-    "eslint": "^4.12.1",
+    "eslint": "^4.13.0",
     "eslint-plugin-haraka": "^1.0.9",
     "eslint-plugin-node": "^5.2.0",
     "fs": "*",
