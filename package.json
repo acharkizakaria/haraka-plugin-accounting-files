@@ -29,7 +29,7 @@
     "dateformat": ">=3.0.3"
   },
   "devDependencies": {
-    "assert": "*",
+    "assert": ">=1.5.0",
     "coveralls": "^3.0.0",
     "eslint": "^5.0.0",
     "eslint-plugin-haraka": "^1.0.9",
