@@ -11,7 +11,7 @@ The ACCOUNTING FILES plugin gives you the ability to extract the useful/custom i
 
 ## INSTALLATION
 
-To enable the plugin in your project you must add the name of the plugin "accounting_files" as a separated line inside the plugins file located inside config directory (`config/plugins`).
+To enable the plugin you must add the name of the plugin "accounting-files" as a separate line inside the plugins file located inside config directory (`config/plugins`).
 
 You should also place the config file "accounting_files.ini" inside the config directory (More details about the content of this file in the next section).
 
